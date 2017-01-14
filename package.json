@@ -1,0 +1,19 @@
+{
+  "name": "ClientAPI",
+  "version": "0.0.0",
+  "description": "This is the rest API for the client ie. window blinds",
+  "main": "app.js",
+  "scripts": {
+    "test": "Hello World"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ClientAPI"
+  },
+  "keywords": [
+    "Client",
+    "Auotomation"
+  ],
+  "author": "Daniel Glownia",
+  "license": "BSD-2-Clause"
+}
