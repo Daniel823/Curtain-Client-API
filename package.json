@@ -15,5 +15,8 @@
     "Auotomation"
   ],
   "author": "Daniel Glownia",
-  "license": "BSD-2-Clause"
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }
