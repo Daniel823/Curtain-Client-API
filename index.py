@@ -13,16 +13,16 @@ def get():
     """
     return json.dumps(mc.getState())
 
-@app.route("/update/<int:action>/", methods=['POST'])
-def post(action):
+@app.route("/update/<int:state>/", methods=['POST'])
+def post(state):
     """
     POST :  tells the client what to do ie. close/open the blind
             returns status codes 2**, 4**, 5** accordingly
     """
-    if(mc.updateState(action)):
-        return status.HTTP_200_OK
+    if(mc.updateState(state)):
+        return '200: The request has succeeded.', status.HTTP_200_OK
 
-    return status.HTTP_500_INTERNAL_SERVER_ERROR
+    return '500: The server encountered an unexpected condition which prevented it from fulfilling the request.', status.HTTP_500_INTERNAL_SERVER_ERROR
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
