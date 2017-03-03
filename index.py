@@ -25,4 +25,4 @@ def post(state):
     return '500: The server encountered an unexpected condition which prevented it from fulfilling the request.', status.HTTP_500_INTERNAL_SERVER_ERROR
 
 if __name__ == "__main__":
-    app.run(host=192.168.1.117, port=1234, debug=True)
+    app.run(host='192.168.1.117', port=1234, debug=True)
