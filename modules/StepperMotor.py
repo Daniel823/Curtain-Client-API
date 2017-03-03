@@ -3,27 +3,6 @@ import sys
 import time
 import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BCM)
-StepPins = [15,18,14,23]
-
-for pin in StepPins:
-  print "Setup pins"
-  GPIO.setup(pin,GPIO.OUT)
-  GPIO.output(pin, False)
-
-Seq = [[1,0,0,1],
-       [1,0,0,0],
-       [1,1,0,0],
-       [0,1,0,0],
-       [0,1,1,0],
-       [0,0,1,0],
-       [0,0,1,1],
-       [0,0,0,1]]
-
-StepCount = len(Seq)
-StepDir = 1
-StepCounter = 0
-
 with open('config/HardwareConfig.json') as data_file:
     hardwareData = json.load(data_file)
 def getId():
@@ -31,6 +10,27 @@ def getId():
 
 def update(state):
     try:
+        GPIO.setmode(GPIO.BCM)
+        StepPins = [15,18,14,23]
+
+        for pin in StepPins:
+            print "Setup pins"
+            GPIO.setup(pin,GPIO.OUT)
+            GPIO.output(pin, False)
+
+        Seq = [[1,0,0,1],
+               [1,0,0,0],
+               [1,1,0,0],
+               [0,1,0,0],
+               [0,1,1,0],
+               [0,0,1,0],
+               [0,0,1,1],
+               [0,0,0,1]]
+
+        StepCount = len(Seq)
+        StepDir = 1
+        StepCounter = 0
+
         counter = 0
         run = True
         # Start main loop
