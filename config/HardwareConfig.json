@@ -1,0 +1,8 @@
+{
+  "StepperMotor":{
+    "id": 1
+  },
+  "Window":{
+    "lengthInInches": 48
+  }
+}

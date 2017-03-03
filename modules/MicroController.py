@@ -2,12 +2,12 @@ import time
 import datetime
 from modules import StepperMotor
 
-currentState = 0 # blinds always start off open
+currentState = 0 # blinds always start closed open
 
 def getState():
     ts = time.time()
     st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-    return {'timestamp': st, 'state': 0}
+    return {'timestamp': st, 'state': currentState, 'StepperMotor':StepperMotor.getId()}
 
 def updateState(state):
     global currentState
