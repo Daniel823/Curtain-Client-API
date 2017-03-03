@@ -50,7 +50,7 @@ while run:
     StepCounter = 0
   if (StepCounter<0):
     StepCounter = StepCount+StepDir
-  if (counter == 100):
+  if (counter == 1000000):
       run = False
   # Wait before moving on
   time.sleep(10/float(1000))
