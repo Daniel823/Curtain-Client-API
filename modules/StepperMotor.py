@@ -39,27 +39,27 @@ def update(state):
             print Seq[StepCounter]
 
             for pin in range(0,4):
-            xpin=StepPins[pin]# Get GPIO
+                xpin=StepPins[pin]# Get GPIO
             if Seq[StepCounter][pin]!=0:
-              print " Enable GPIO %i" %(xpin)
-              GPIO.output(xpin, True)
+                print " Enable GPIO %i" %(xpin)
+                GPIO.output(xpin, True)
             else:
-              GPIO.output(xpin, False)
+                GPIO.output(xpin, False)
 
             StepCounter += StepDir
             counter = counter + 1
             # If we reach the end of the sequence
             # start again
             if (StepCounter>=StepCount):
-            StepCounter = 0
+                StepCounter = 0
             if (StepCounter<0):
-            StepCounter = StepCount+StepDir
+                StepCounter = StepCount+StepDir
             if (counter == 1000000):
-              run = False
+                run = False
             # Wait before moving on
             time.sleep(10/float(1000))
         return True
-        
+
     except:
         return False
 
