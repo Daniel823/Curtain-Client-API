@@ -11,13 +11,21 @@ def getId():
 def update(state):
     try:
         GPIO.setmode(GPIO.BCM)
-        StepPins = [15,18,14,23]
 
+        # Define GPIO signals to use
+        # Physical pins 11,15,16,18
+        # GPIO17,GPIO22,GPIO23,GPIO24
+        StepPins = [15,18,14,23]
+        #StepPins = [23,14,18,15]
+
+        # Set all pins as output
         for pin in StepPins:
             print "Setup pins"
             GPIO.setup(pin,GPIO.OUT)
             GPIO.output(pin, False)
 
+        # Define advanced sequence
+        # as shown in manufacturers datasheet
         Seq = [[1,0,0,1],
                [1,0,0,0],
                [1,1,0,0],
@@ -28,13 +36,21 @@ def update(state):
                [0,0,0,1]]
 
         StepCount = len(Seq)
-        StepDir = 1
+        StepDir = -1 # Set to 1 or 2 for clockwise
+                    # Set to -1 or -2 for anti-clockwise
+
+        # Read wait time from command line
+        if len(sys.argv)>1:
+            WaitTime = int(sys.argv[1])/float(1000)
+        else:
+            WaitTime = 10/float(1000)
+
+        # Initialise variables
         StepCounter = 0
 
-        counter = 0
-        run = True
         # Start main loop
-        while run:
+        while True:
+
             print StepCounter,
             print Seq[StepCounter]
 
@@ -47,17 +63,16 @@ def update(state):
                 GPIO.output(xpin, False)
 
             StepCounter += StepDir
-            counter = counter + 1
+
             # If we reach the end of the sequence
             # start again
             if (StepCounter>=StepCount):
                 StepCounter = 0
             if (StepCounter<0):
                 StepCounter = StepCount+StepDir
-            if (counter == 1000000):
-                run = False
+
             # Wait before moving on
-            time.sleep(10/float(1000))
+            time.sleep(WaitTime)
         return True
 
     except:
