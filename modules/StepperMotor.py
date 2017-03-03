@@ -23,17 +23,13 @@ Seq = [[1,0,0,1],
 StepCount = len(Seq)
 StepDir = 1
 
-# Read wait time from command line
-if len(sys.argv)>1:
-  WaitTime = int(sys.argv[1])/float(1000)
-else:
-  WaitTime = 10/float(1000)
-
 # Initialise variables
 StepCounter = 0
 
+counter = 0
+run = True
 # Start main loop
-while True:
+while run:
 
   print StepCounter,
   print Seq[StepCounter]
@@ -47,14 +43,15 @@ while True:
       GPIO.output(xpin, False)
 
   StepCounter += StepDir
-
+  counter = counter + 1
   # If we reach the end of the sequence
   # start again
   if (StepCounter>=StepCount):
     StepCounter = 0
   if (StepCounter<0):
     StepCounter = StepCount+StepDir
-
+  if (counter == 100):
+      run = False
   # Wait before moving on
   time.sleep(WaitTime)
 
