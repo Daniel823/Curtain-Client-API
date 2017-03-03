@@ -53,7 +53,7 @@ while run:
   if (counter == 100):
       run = False
   # Wait before moving on
-  time.sleep(300)
+  time.sleep()
 
 
 
