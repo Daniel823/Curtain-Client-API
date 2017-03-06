@@ -68,5 +68,9 @@ def update(state):
           time.sleep(WaitTime)
           count = count + 1
 
+        return True
+
     except:
         return False
+
+    return True
