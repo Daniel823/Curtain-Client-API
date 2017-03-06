@@ -17,4 +17,5 @@ def updateState(state):
         return True
     else:
         currentState = state
-        return StepperMotor.update(state)
+        StepperMotor.update(state)
+        return True
