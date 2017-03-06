@@ -3,29 +3,36 @@ import sys
 import time
 import RPi.GPIO as GPIO
 
+INCHES_PER_ROTATION = 4 #1.9625
+STEPS_PER_ROTATION = 400
+WINDOW_HIEGHT = 40
+SPEED = 5
+
+# -1 open
+# 1 close
+
 with open('config/HardwareConfig.json') as data_file:
     hardwareData = json.load(data_file)
+
 def getId():
     return hardwareData['StepperMotor']['id']
 
+def calcSteps():
+  rot = WINDOW_HIEGHT / INCHES_PER_ROTATION
+  return rot * STEPS_PER_ROTATION
+
 def update(state):
     try:
+        DISTANCE = hardwareData['Window']['lengthInInches']
+
         GPIO.setmode(GPIO.BCM)
-
-        # Define GPIO signals to use
-        # Physical pins 11,15,16,18
-        # GPIO17,GPIO22,GPIO23,GPIO24
         StepPins = [15,18,14,23]
-        #StepPins = [23,14,18,15]
 
-        # Set all pins as output
         for pin in StepPins:
-            print "Setup pins"
-            GPIO.setup(pin,GPIO.OUT)
-            GPIO.output(pin, False)
+          print "Setup pins"
+          GPIO.setup(pin,GPIO.OUT)
+          GPIO.output(pin, False)
 
-        # Define advanced sequence
-        # as shown in manufacturers datasheet
         Seq = [[1,0,0,1],
                [1,0,0,0],
                [1,1,0,0],
@@ -35,44 +42,32 @@ def update(state):
                [0,0,1,1],
                [0,0,0,1]]
 
+        StepDir = lambda state: 1 if x == 1 else -1
         StepCount = len(Seq)
-        StepDir = -1 # Set to 1 or 2 for clockwise
-                    # Set to -1 or -2 for anti-clockwise
-
-        # Read wait time from command line
-        if len(sys.argv)>1:
-            WaitTime = int(sys.argv[1])/float(1000)
-        else:
-            WaitTime = 10/float(1000)
-
-        # Initialise variables
+        WaitTime = int(SPEED)/float(1000)
         StepCounter = 0
+        count = 0
+        rotation = calcSteps()
 
-        # Start main loop
-        while True:
-
-            print StepCounter,
-            print Seq[StepCounter]
-
-            for pin in range(0,4):
-                xpin=StepPins[pin]# Get GPIO
+        while count != rotation:
+          for pin in range(0,4):
+            xpin=StepPins[pin]
             if Seq[StepCounter][pin]!=0:
-                print " Enable GPIO %i" %(xpin)
-                GPIO.output(xpin, True)
+              GPIO.output(xpin, True)
             else:
-                GPIO.output(xpin, False)
+              GPIO.output(xpin, False)
 
-            StepCounter += StepDir
+          StepCounter += StepDir
 
-            # If we reach the end of the sequence
-            # start again
-            if (StepCounter>=StepCount):
-                StepCounter = 0
-            if (StepCounter<0):
-                StepCounter = StepCount+StepDir
 
-            # Wait before moving on
-            time.sleep(WaitTime)
+          if (StepCounter>=StepCount):
+            StepCounter = 0
+          if (StepCounter<0):
+            StepCounter = StepCount+StepDir
+
+          time.sleep(WaitTime)
+          count = count + 1
+
         return True
 
     except:
