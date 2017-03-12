@@ -71,6 +71,7 @@ def update(state):
         return True
 
     except:
+        print 'Something broke in the stepper motor!'
         return False
 
     return True
