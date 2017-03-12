@@ -71,7 +71,7 @@ def update(state):
         return True
 
     except:
-        print 'Something broke in the stepper motor!'
+        print "Unexpected error:", sys.exc_info()[0]
         return False
 
     return True
