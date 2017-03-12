@@ -30,9 +30,9 @@ def update(state):
         StepPins = [15,18,14,23]
 
         for pin in StepPins:
-          print "Setup pins"
-          GPIO.setup(pin,GPIO.OUT)
-          GPIO.output(pin, False)
+            print "Setup pins"
+            GPIO.setup(pin,GPIO.OUT)
+            GPIO.output(pin, False)
 
         Seq = [[1,0,0,1],
                [1,0,0,0],
@@ -51,24 +51,24 @@ def update(state):
         rotation = calcSteps()
 
         while count != rotation:
-          for pin in range(0,4):
-            xpin=StepPins[pin]
-            if Seq[StepCounter][pin]!=0:
-              GPIO.output(xpin, True)
-            else:
-              GPIO.output(xpin, False)
+            for pin in range(0,4):
+                xpin=StepPins[pin]
+                if Seq[StepCounter][pin]!=0:
+                    GPIO.output(xpin, True)
+                else:
+                    GPIO.output(xpin, False)
 
-          StepCounter += StepDir
+            StepCounter += StepDir
 
 
-          if (StepCounter>=StepCount):
-            StepCounter = 0
-          if (StepCounter<0):
-            StepCounter = StepCount+StepDir
+            if (StepCounter>=StepCount):
+                StepCounter = 0
+            if (StepCounter<0):
+                StepCounter = StepCount+StepDir
 
-          time.sleep(WaitTime)
-          count = count + 1
-
+            time.sleep(WaitTime)
+            count = count + 1
+            
         return True
 
     except:
