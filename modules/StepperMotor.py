@@ -23,6 +23,7 @@ def calcSteps():
 
 def update(state):
     try:
+        print type(state)
         DISTANCE = hardwareData['Window']['lengthInInches']
 
         GPIO.setmode(GPIO.BCM)
