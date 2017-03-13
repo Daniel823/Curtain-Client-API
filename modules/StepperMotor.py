@@ -11,11 +11,8 @@ SPEED = 5
 # -1 open
 # 1 close
 
-with open('config/HardwareConfig.json') as data_file:
-    hardwareData = json.load(data_file)
-
 def getId():
-    return hardwareData['StepperMotor']['id']
+    return 1
 
 def calcSteps():
   rot = WINDOW_HIEGHT / INCHES_PER_ROTATION
@@ -24,7 +21,7 @@ def calcSteps():
 def update(state):
     try:
         print type(state)
-        DISTANCE = hardwareData['Window']['lengthInInches']
+        DISTANCE = 40
 
         GPIO.setmode(GPIO.BCM)
         StepPins = [15,18,14,23]
@@ -68,7 +65,7 @@ def update(state):
 
             time.sleep(WaitTime)
             count = count + 1
-            
+
         return True
 
     except:
