@@ -20,7 +20,6 @@ def calcSteps():
 
 def update(state):
     try:
-        print type(state)
         DISTANCE = 40
 
         GPIO.setmode(GPIO.BCM)
@@ -41,7 +40,7 @@ def update(state):
                [0,0,0,1]]
 
         StepDir = lambda state: 1 if x == 1 else -1
-        print type(StepDir)
+
         StepCount = len(Seq)
         WaitTime = int(SPEED)/float(1000)
         StepCounter = 0
@@ -56,13 +55,13 @@ def update(state):
                 else:
                     GPIO.output(xpin, False)
 
-            StepCounter += StepDir
+            StepCounter += StepDir(state)
 
 
             if (StepCounter>=StepCount):
                 StepCounter = 0
             if (StepCounter<0):
-                StepCounter = StepCount+StepDir
+                StepCounter = StepCount+StepDir(state)
 
             time.sleep(WaitTime)
             count = count + 1
