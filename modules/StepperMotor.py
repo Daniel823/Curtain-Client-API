@@ -56,7 +56,7 @@ def update(state):
                 else:
                     GPIO.output(xpin, False)
 
-            StepCounter += StepDir(state)
+            StepCounter = StepCounter + StepDir(state)
 
 
             if (StepCounter>=StepCount):
