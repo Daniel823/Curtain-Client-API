@@ -2,7 +2,7 @@ import time
 import datetime
 from modules import StepperMotor
 
-currentState = 0 # blinds always start closed open
+currentState = 1 # blinds always start open
 
 def getState():
     ts = time.time()
