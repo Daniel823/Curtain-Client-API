@@ -40,7 +40,7 @@ def update(state):
                [0,0,1,1],
                [0,0,0,1]]
 
-        if x == 1:
+        if state == 1:
             StepDir = 1
         else:
             StepDir = -1
