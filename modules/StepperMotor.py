@@ -41,6 +41,7 @@ def update(state):
                [0,0,0,1]]
 
         StepDir = lambda state: 1 if x == 1 else -1
+        print type(StepDir)
         StepCount = len(Seq)
         WaitTime = int(SPEED)/float(1000)
         StepCounter = 0
