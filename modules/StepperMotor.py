@@ -40,7 +40,10 @@ def update(state):
                [0,0,1,1],
                [0,0,0,1]]
 
-        StepDir = lambda state: 1 if x == 1 else -1
+        if x == 1:
+            StepDir = 1
+        else:
+            StepDir = -1
 
         StepCount = len(Seq)
         WaitTime = int(SPEED)/float(1000)
@@ -56,13 +59,13 @@ def update(state):
                 else:
                     GPIO.output(xpin, False)
 
-            StepCounter = StepCounter + StepDir(state)
+            StepCounter = StepCounter + StepDir
 
 
             if (StepCounter>=StepCount):
                 StepCounter = 0
             if (StepCounter<0):
-                StepCounter = StepCount+StepDir(state)
+                StepCounter = StepCount+StepDir
 
             time.sleep(WaitTime)
             count = count + 1
