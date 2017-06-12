@@ -1,7 +1,26 @@
-Client
+# Curtain Rest API
+**Problem Statement**: Closing and opening the blinds is a boring and tedious task. Often, one picks a state-open or closed-and
+never bothers to change it. 
 
-This is the client of the application. It is responsible for closing and
-opening the blind. The application is made up of two parts, the rest API
-(this gives the information about the state and updates the state of the
-blind), and constantly running program that updates the server API every
-10 min with the state of the blind.
+## Approach
+Create a series of micro services to predict when to open and close the blinds.
+
+## Service
+Curtain Client Service: Responsible for the state of the blind and any interaction with the hardware i.e. Raspberry Pie, Stepper Motor
+
+### Endpoints: 	
+
+```/state```
+
+  ```
+  {
+    'timestamp': 2017-06-11 19:00:57, 
+    'state': 0,
+    'StepperMotor': 1
+  }
+  ```
+
+```/update/<int:state>/```
+
++ 0 to open blinds
++ 1 to close the blinds
