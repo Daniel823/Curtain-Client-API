@@ -6,7 +6,7 @@ never bothers to change it.
 Create a series of micro services to predict when to open and close the blinds.
 
 ## Service
-Curtain Client Service: Responsible for the state of the blind and any interaction with the hardware i.e. Raspberry Pie, Stepper Motor
+*Curtain Client Service*: Responsible for the state of the blind and any interaction with the hardware i.e. Raspberry Pie, Stepper Motor
 
 ### Endpoints: 	
 
